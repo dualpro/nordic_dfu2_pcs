@@ -163,7 +163,7 @@ class NordicDfuPlugin : FlutterPlugin, MethodCallHandler, EventChannel.StreamHan
             )
         }
         if(maxMtu != null){
-            starter.setMtu(maxMtu)
+            starter.setMtu(maxMtu.toInt())
         }
         if (forceDfu != null) starter.setForceDfu(forceDfu)
         if (disableNotification != null) starter.setDisableNotification(disableNotification)
