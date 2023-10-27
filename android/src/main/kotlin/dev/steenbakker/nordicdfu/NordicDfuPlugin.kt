@@ -139,7 +139,7 @@ class NordicDfuPlugin : FlutterPlugin, MethodCallHandler, EventChannel.StreamHan
         address: String,
         name: String?,
         filePath: String,
-        maxMtu: UInt,
+        maxMtu: UInt?,
         forceDfu: Boolean?,
         enableUnsafeExperimentalButtonlessServiceInSecureDfu: Boolean?,
         disableNotification: Boolean?,
