@@ -47,8 +47,7 @@ class NordicDfu {
   NordicDfu._internal();
 
   static const String namespace = 'dev.steenbakker.nordic_dfu';
-  static const MethodChannel _methodChannel =
-      MethodChannel('$namespace/method');
+  static const MethodChannel _methodChannel = MethodChannel('$namespace/method');
   static const EventChannel _eventChannel = EventChannel('$namespace/event');
   StreamSubscription? events;
 
@@ -82,13 +81,13 @@ class NordicDfu {
   Future<String?> startDfu(
     String address,
     String filePath, {
+    int? maxMtu,
     String? name,
     bool? fileInAsset,
     bool? forceDfu,
     int? numberOfPackets,
     bool? enableUnsafeExperimentalButtonlessServiceInSecureDfu,
-    AndroidSpecialParameter androidSpecialParameter =
-        const AndroidSpecialParameter(),
+    AndroidSpecialParameter androidSpecialParameter = const AndroidSpecialParameter(),
     IosSpecialParameter iosSpecialParameter = const IosSpecialParameter(),
     DfuCallback? onDeviceConnected,
     DfuCallback? onDeviceConnecting,
@@ -140,8 +139,7 @@ class NordicDfu {
             onFirmwareValidating?.call(data[key] as String);
             break;
           case 'onError':
-            final Map<String, dynamic> result =
-                Map<String, dynamic>.from(data[key] as Map);
+            final Map<String, dynamic> result = Map<String, dynamic>.from(data[key] as Map);
             onError?.call(
               result['deviceAddress'] as String,
               result['error'] as int,
@@ -151,8 +149,7 @@ class NordicDfu {
             events?.cancel();
             break;
           case 'onProgressChanged':
-            final Map<String, dynamic> result =
-                Map<String, dynamic>.from(data[key] as Map);
+            final Map<String, dynamic> result = Map<String, dynamic>.from(data[key] as Map);
             onProgressChanged?.call(
               result['deviceAddress'] as String,
               result['percent'] as int,
@@ -169,12 +166,12 @@ class NordicDfu {
     return _methodChannel.invokeMethod('startDfu', <String, dynamic>{
       'address': address,
       'filePath': filePath,
+      'maxMtu': maxMtu,
       'name': name,
       'fileInAsset': fileInAsset,
       'forceDfu': forceDfu,
       'numberOfPackets': numberOfPackets,
-      'enableUnsafeExperimentalButtonlessServiceInSecureDfu':
-          enableUnsafeExperimentalButtonlessServiceInSecureDfu,
+      'enableUnsafeExperimentalButtonlessServiceInSecureDfu': enableUnsafeExperimentalButtonlessServiceInSecureDfu,
       ...androidSpecialParameter.toJson(),
       ...iosSpecialParameter.toJson(),
     });

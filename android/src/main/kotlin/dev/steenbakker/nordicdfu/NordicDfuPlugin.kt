@@ -71,6 +71,7 @@ class NordicDfuPlugin : FlutterPlugin, MethodCallHandler, EventChannel.StreamHan
         val address = call.argument<String>("address")
         val name = call.argument<String>("name")
         var filePath = call.argument<String>("filePath")
+        val maxMtu = call.argument<UInt>("maxMtu")
         var fileInAsset = call.argument<Boolean>("fileInAsset")
         val forceDfu = call.argument<Boolean>("forceDfu")
         val enableUnsafeExperimentalButtonlessServiceInSecureDfu =
@@ -112,6 +113,7 @@ class NordicDfuPlugin : FlutterPlugin, MethodCallHandler, EventChannel.StreamHan
             address,
             name,
             filePath,
+            maxMtu,
             forceDfu,
             enableUnsafeExperimentalButtonlessServiceInSecureDfu,
             disableNotification,
@@ -137,6 +139,7 @@ class NordicDfuPlugin : FlutterPlugin, MethodCallHandler, EventChannel.StreamHan
         address: String,
         name: String?,
         filePath: String,
+        maxMtu: UInt,
         forceDfu: Boolean?,
         enableUnsafeExperimentalButtonlessServiceInSecureDfu: Boolean?,
         disableNotification: Boolean?,
@@ -158,6 +161,9 @@ class NordicDfuPlugin : FlutterPlugin, MethodCallHandler, EventChannel.StreamHan
             starter.setUnsafeExperimentalButtonlessServiceInSecureDfuEnabled(
                 enableUnsafeExperimentalButtonlessServiceInSecureDfu
             )
+        }
+        if(maxMtu != null){
+            starter.setMtu(maxMtu)
         }
         if (forceDfu != null) starter.setForceDfu(forceDfu)
         if (disableNotification != null) starter.setDisableNotification(disableNotification)
