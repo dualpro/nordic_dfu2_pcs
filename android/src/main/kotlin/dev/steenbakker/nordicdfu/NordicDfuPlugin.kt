@@ -163,7 +163,6 @@ class NordicDfuPlugin : FlutterPlugin, MethodCallHandler, EventChannel.StreamHan
             )
         }
         starter.setMtu(23)
-        starter.setCurrentMtu(23);
 //        if(maxMtu != null){
 //            starter.setMtu(maxMtu)
 //        }
