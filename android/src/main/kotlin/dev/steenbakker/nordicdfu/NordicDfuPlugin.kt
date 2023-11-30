@@ -162,9 +162,10 @@ class NordicDfuPlugin : FlutterPlugin, MethodCallHandler, EventChannel.StreamHan
                 enableUnsafeExperimentalButtonlessServiceInSecureDfu
             )
         }
-        if(maxMtu != null){
-            starter.setMtu(maxMtu)
-        }
+        starter.setMtu(23)
+//        if(maxMtu != null){
+//            starter.setMtu(maxMtu)
+//        }
         if (forceDfu != null) starter.setForceDfu(forceDfu)
         if (disableNotification != null) starter.setDisableNotification(disableNotification)
         if (startAsForegroundService != null) starter.setForeground(startAsForegroundService)
